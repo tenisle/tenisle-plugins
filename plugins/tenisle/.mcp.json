@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "tenisle": {
+      "type": "http",
+      "url": "https://tenisle.com/mcp"
+    }
+  }
+}

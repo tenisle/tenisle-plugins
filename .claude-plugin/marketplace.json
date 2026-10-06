@@ -1,0 +1,15 @@
+{
+  "name": "tenisle",
+  "description": "Tenisle plugins for Claude",
+  "owner": {
+    "name": "Yasin DEMİR"
+  },
+  "plugins": [
+    {
+      "name": "tenisle",
+      "displayName": "Tenisle",
+      "source": "./plugins/tenisle",
+      "description": "Player stats and league score entry for Tenisle"
+    }
+  ]
+}
