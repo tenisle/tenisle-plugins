@@ -1,7 +1,7 @@
 {
   "name": "tenisle",
   "displayName": "Tenisle",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Use Tenisle with Claude: check player stats, match history and head-to-head records, and enter or approve league match scores",
   "author": {
     "name": "Yasin DEMİR"
@@ -9,6 +9,7 @@
   "homepage": "https://tenisle.com",
   "repository": "https://github.com/tenisle/tenisle-plugins",
   "privacyPolicyUrl": "https://tenisle.com/privacy",
+  "supportUrl": "https://github.com/tenisle/tenisle-plugins/issues",
   "keywords": [
     "tenisle",
     "tennis",
