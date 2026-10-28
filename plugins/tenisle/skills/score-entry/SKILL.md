@@ -9,7 +9,7 @@ description: >
   "skor gir", "Ahmet'i 6-4 6-3 yendim", "skoru girilmemiş maçlarım",
   "skoru onayla", "skoru reddet", "rakip gelmedi", "rakip sakatlandı".
 metadata:
-  version: "0.1.0"
+  version: "0.2.0"
 ---
 
 # Tenisle Score Entry
@@ -24,8 +24,13 @@ Reply in the language the user writes in. Translate Tenisle's Turkish labels.
 
 ## Scope
 
-- Supported: league matches through `submit_league_match_score` with the
-  actions `submit`, `approve`, `reject`, `clear`.
+- Supported: league matches through four separate tools, one per operation:
+  - `submit_league_match_score`: send a score (needs `score`).
+  - `approve_league_match_score`: approve a score the opponent submitted.
+  - `reject_league_match_score`: reject a score the opponent submitted.
+  - `clear_league_match_score`: delete a score (club or league admin only).
+  Each tool takes `leagueId` and `matchId` (`clubId` is optional). These tools
+  have no `action` field; sending one makes the call fail.
 - Not supported in this version: tournament match scores. They need club
   admin rights (`update_tournament_match_score`). Tell the user to enter
   tournament scores on the Tenisle website or ask a club admin.
@@ -61,8 +66,8 @@ examples. Key rules:
 
 ## Step 3: Confirm before every action
 
-Before calling `submit_league_match_score`, show a short summary and wait
-for an explicit yes:
+Before calling any score tool, show a short summary and wait for an explicit
+yes:
 
 - League and match date
 - Opponent name
@@ -70,10 +75,11 @@ for an explicit yes:
 - Result: won or lost, or walkover / retired / defaulted
 - Any note the user added
 - What happens next:
-  - Player submits: the opponent must approve the score.
+  - Player submits (`submit_league_match_score`): the opponent must approve the score.
   - Club or league admin submits: the score is approved directly.
-  - Reject: the opponent's score is removed from approval; offer to submit the correct score.
-  - Clear (admin only): the score is deleted.
+  - Reject (`reject_league_match_score`): the opponent's score is deleted; offer to submit the correct score.
+  - Clear (`clear_league_match_score`, admin only): the score is deleted. In a
+    playoff match, later-round matches that depend on it are deleted too.
 
 Do not send anything if the answer is not a clear yes. If the user corrects
 the score, show the new summary and ask again.
@@ -86,8 +92,8 @@ each result.
 
 1. Show the score the opponent submitted, from the user's point of view.
 2. Ask: approve or reject?
-3. Call `submit_league_match_score` with `action: "approve"` or `action: "reject"`.
-   No `score` object is needed.
+3. Call `approve_league_match_score` or `reject_league_match_score` with
+   `leagueId` and `matchId`. Do not send a `score` or `action`.
 4. After a reject, offer to submit the correct score.
 
 ## Step 5: Report the result
@@ -100,5 +106,5 @@ each result.
 ## Never
 
 - Never send, approve, reject or clear a score without explicit confirmation.
-- Never use `clear` unless the user asks to delete a score and is an admin.
+- Never use `clear_league_match_score` unless the user asks to delete a score and is an admin.
 - Never invent sets, tie-break points or notes the user did not give.

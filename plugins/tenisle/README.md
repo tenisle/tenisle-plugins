@@ -11,7 +11,7 @@ Claude replies in the language you write in (for example Turkish or English).
 | Component | Name | Purpose |
 |---|---|---|
 | Skill | `player-stats` | Profile stats, match history, head-to-head, standings, achievements (read-only) |
-| Skill | `score-entry` | Find matches without a score, submit a score, approve or reject an opponent's score |
+| Skill | `score-entry` | Find matches without a score, submit a score, approve or reject an opponent's score, clear a score (admins) |
 | MCP server | `tenisle` | Connects Claude to Tenisle at `https://tenisle.com/mcp` |
 
 ## Setup
