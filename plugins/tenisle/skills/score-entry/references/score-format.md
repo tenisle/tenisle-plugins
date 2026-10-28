@@ -1,5 +1,8 @@
 # Score Format for submit_league_match_score
 
+This `score` object is only used by `submit_league_match_score`. The approve,
+reject and clear tools take no score.
+
 ## Score object
 
 ```json
@@ -12,7 +15,7 @@
 }
 ```
 
-- `sets` is required for `action: "submit"`. Order: as played. Maximum 5 sets.
+- `sets` is required. Order: as played. Maximum 5 sets.
 - With `perspective: "mine"`: `home` = the user's side, `away` = the opponent.
 - `walkover`: the side that did not come to the match (that side loses).
 - `retired`: the side that stopped because of injury (that side loses).
