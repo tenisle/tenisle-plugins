@@ -6,6 +6,9 @@ approve league match scores in normal conversation.
 
 Claude replies in the language you write in (for example Turkish or English).
 
+> Using DeepSeek Harness? The same features ship as a DSH bundle in
+> [../../dsh/README.md](../../dsh/README.md).
+
 ## Components
 
 | Component | Name | Purpose |

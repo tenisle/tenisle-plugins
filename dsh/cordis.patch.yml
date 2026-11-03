@@ -1,0 +1,24 @@
+# Tenisle bundle: one Host row that owns the Tenisle account session and a
+# loopback MCP bridge, plus the shipped MCP client row that talks to the bridge.
+#
+# The shipped MCP client speaks Streamable HTTP with static headers only, so
+# this bundle keeps the OAuth tokens itself and forwards every MCP request to
+# https://tenisle.com/mcp with a fresh Bearer token. Tool names reach the model
+# as `mcp__tenisle__<tool>`.
+
+- insert:
+    - id: tenisle
+      name: '@tenisle/dsh-plugin'
+      config:
+        issuer: https://tenisle.com
+        port: 61980
+        autoLogin: true
+        openBrowser: true
+
+    - id: tenisle-mcp
+      name: '@deepseek-ai/dsh-mcp-client'
+      config:
+        serverName: tenisle
+        transport: streamable-http
+        url: http://127.0.0.1:61980/mcp
+        failOnStartupError: false
