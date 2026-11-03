@@ -8,7 +8,7 @@
 
 import assert from 'node:assert/strict'
 import { createServer } from 'node:http'
-import { mkdtemp, stat } from 'node:fs/promises'
+import { mkdtemp, readFile, stat } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { dirname, join } from 'node:path'
 import { test } from 'node:test'
@@ -99,6 +99,23 @@ test('registers both bundled skills with a registry-valid shape', () => {
     assert.equal(skill.path, join(skill.resourceBase.path, 'SKILL.md'))
   }
   dispose()
+})
+
+test('bundle ships a package-local icon and lowercase display metadata', async () => {
+  const manifest = JSON.parse(await readFile(join(PACKAGE_DIR, 'package.json'), 'utf8'))
+  assert.equal(manifest.exports['./icon'], './icon.png')
+
+  const icon = await readFile(join(PACKAGE_DIR, manifest.exports['./icon']))
+  assert.ok(icon.length > 0 && icon.length <= 256 * 1024, `icon must stay under 256 KiB (was ${icon.length} bytes)`)
+  assert.equal(icon.subarray(0, 8).toString('hex'), '89504e470d0a1a0a', 'icon must be a PNG')
+  assert.ok(manifest.files.includes('icon.png'))
+
+  for (const locale of ['en', 'tr']) {
+    const { meta } = JSON.parse(await readFile(join(PACKAGE_DIR, 'locale', `${locale}.json`), 'utf8'))
+    assert.equal(meta.title, 'tenisle')
+    assert.equal(typeof meta.description, 'string')
+    assert.ok(meta.description.length > 0)
+  }
 })
 
 test('credential document is created 0600 and reports a usable session', async () => {

@@ -1,6 +1,6 @@
 {
   "name": "@tenisle/dsh-plugin",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Use Tenisle with DeepSeek Harness: player stats, match history, head-to-head records, league standings and league score entry",
   "type": "module",
   "license": "MIT",
@@ -23,7 +23,7 @@
   "exports": {
     ".": "./index.js",
     "./locale/*.json": "./locale/*.json",
-    "./icon": "./icon.svg"
+    "./icon": "./icon.png"
   },
   "scripts": {
     "test": "node --test test/*.test.js"
@@ -33,7 +33,7 @@
     "lib/*.js",
     "cordis.patch.yml",
     "locale/*.json",
-    "icon.svg",
+    "icon.png",
     "skills/**",
     "README.md"
   ],
