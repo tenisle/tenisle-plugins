@@ -135,5 +135,5 @@ dsh/
 ├── skills/               the two bundled skills
 ├── test/                 offline smoke tests
 ├── locale/               display metadata (en, tr)
-└── icon.svg              plugin icon
+└── icon.png              plugin icon (512×512, Tenisle mark)
 ```
