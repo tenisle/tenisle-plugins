@@ -27,6 +27,14 @@ Tenisle sign-in.
 
 See [dsh/README.md](dsh/README.md) for install steps, configuration and limits.
 
+To share it, point the other person at this repository: the bundle installs
+straight from Git
+(`git+https://github.com/tenisle/tenisle-plugins.git#<commit>&path:/dsh`), or
+through the Tenisle market index
+(`https://cdn.jsdelivr.net/gh/tenisle/tenisle-plugins@main/dsh/market/index.json`,
+added in Settings → Plugins → Experimental → Custom plugin market → Discover).
+Each person signs in with their own Tenisle account.
+
 ## Layout
 
 | Path | Platform | Contents |
