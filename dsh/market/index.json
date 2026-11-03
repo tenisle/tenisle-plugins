@@ -1,0 +1,43 @@
+{
+  "format": 1,
+  "title": {
+    "en": "Tenisle plugins",
+    "tr": "Tenisle eklentileri"
+  },
+  "description": {
+    "en": "Official Tenisle plugins for DeepSeek Harness.",
+    "tr": "DeepSeek Harness için resmî Tenisle eklentileri."
+  },
+  "plugins": [
+    {
+      "name": "@tenisle/dsh-plugin",
+      "title": {
+        "en": "tenisle",
+        "tr": "tenisle"
+      },
+      "description": {
+        "en": "Tennis stats, match history, head-to-head records, league standings and league score entry through your own Tenisle account.",
+        "tr": "Kendi Tenisle hesabınızla tenis istatistikleri, maç geçmişi, karşılıklı rekabet, lig puan durumu ve lig skoru girişi."
+      },
+      "icon": "https://cdn.jsdelivr.net/gh/tenisle/tenisle-plugins@21bc6e09c6c030bf917f58ced799b95112993d32/dsh/icon.png",
+      "author": "Yasin Demir",
+      "homepage": "https://tenisle.com",
+      "repository": {
+        "url": "https://github.com/tenisle/tenisle-plugins",
+        "directory": "dsh"
+      },
+      "versions": [
+        {
+          "version": "0.1.1",
+          "publishTimestamp": 1793722001,
+          "source": {
+            "type": "git",
+            "url": "https://github.com/tenisle/tenisle-plugins.git",
+            "commit": "21bc6e09c6c030bf917f58ced799b95112993d32",
+            "path": "dsh"
+          }
+        }
+      ]
+    }
+  ]
+}

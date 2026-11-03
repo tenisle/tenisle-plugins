@@ -74,6 +74,38 @@ Access tokens last one hour; the plugin refreshes them silently. Refresh tokens
 last 30 days and rotate on every refresh, so a working installation stays
 connected as long as you use it.
 
+## Share it with someone
+
+Nothing is published to npm, so sharing means pointing the other person at this
+repository. Each person signs in with their **own** Tenisle account; no
+credential is ever shared.
+
+Install straight from the repository, with no market involved:
+
+```sh
+dsh plugin --profile <profile> add "git+https://github.com/tenisle/tenisle-plugins.git#<commit>&path:/dsh"
+```
+
+Replace `<profile>` with the profile that person's host runs (`desktop` for the
+DeepSeek Harness desktop app, `web` for `dsh web`) and `<commit>` with a commit
+that contains `dsh/` (the tip of `main`, for example).
+
+Or share the market index — in DeepSeek Harness, open
+**Settings → Plugins → Experimental**, turn on **Custom plugin market**, then
+**Discover → Add index source** and paste:
+
+```
+https://cdn.jsdelivr.net/gh/tenisle/tenisle-plugins@main/dsh/market/index.json
+```
+
+The Discover tab then lists `tenisle` with its icon, and installing is one
+click plus the confirmation dialog. The index pins an exact commit, so the
+person installs exactly what was published.
+
+Claude users install the Claude plugin from the same repository instead:
+`/plugin marketplace add tenisle/tenisle-plugins`, then
+`/plugin install tenisle@tenisle`.
+
 ## Usage examples
 
 Player stats:
@@ -120,6 +152,18 @@ cd dsh
 npm test
 ```
 
+The DeepSeek Harness market index in `market/index.json` is generated, never
+hand-written:
+
+```bash
+cd dsh
+npm run market -- --commit "$(git rev-parse HEAD)"   # rewrite market/index.json
+npm run market -- --dry                              # print it, write nothing
+```
+
+Regenerate it after bumping the version and tagging the release, so the index
+keeps pointing at a commit that contains the published bundle.
+
 ## Layout
 
 ```
@@ -133,6 +177,7 @@ dsh/
 │   ├── skills.js         embedded skill registration
 │   └── token-store.js    atomic 0600 credential document
 ├── skills/               the two bundled skills
+├── market/               publishable market index and its generator
 ├── test/                 offline smoke tests
 ├── locale/               display metadata (en, tr)
 └── icon.png              plugin icon (512×512, Tenisle mark)
